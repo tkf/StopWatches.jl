@@ -1,0 +1,13 @@
+name = "StopWatches"
+uuid = "bd91af8b-4a2c-4c31-8d03-fd1a3fdcabd8"
+authors = ["Takafumi Arakaki <aka.tkf@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
