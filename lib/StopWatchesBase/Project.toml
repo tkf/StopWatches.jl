@@ -1,0 +1,10 @@
+name = "StopWatchesBase"
+uuid = "178bb2cc-7960-4f9f-ac71-f6611ba825b1"
+authors = ["Takafumi Arakaki <aka.tkf@gmail.com> and contributors"]
+version = "0.1.0"
+
+[deps]
+UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[compat]
+julia = "1"

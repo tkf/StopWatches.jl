@@ -1,0 +1,5 @@
+[deps]
+StopWatches = "bd91af8b-4a2c-4c31-8d03-fd1a3fdcabd8"
+StopWatchesBase = "178bb2cc-7960-4f9f-ac71-f6611ba825b1"
+StopWatchesTests = "77cc460b-29e5-458f-bd5e-ba4a9db4c8e3"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
