@@ -1,7 +1,7 @@
 module TestRecording
 
 using StopWatches
-using StopWatchesBase: Record, RecordHandle, StopWatchesBase
+using StopWatchesBase: Record, StopWatchesBase
 using Test
 
 using ..Utils: @spawn
@@ -18,41 +18,37 @@ function test_allocation_hack()
 end
 
 function record_once()
-    handle = @stopwatch :record_once begin
+    ans = @stopwatch :record_once begin
         y = 1
     end
-    return y, handle
+    return (ans, y)
 end
 
 function test_record_once()
-    y, handle = record_once()
-    @test y == 1
-    @test handle isa RecordHandle
+    @test record_once() == (1, 1)
 end
 
 function no_tag()
-    handle = @stopwatch y = 1
-    return y, handle
+    ans = @stopwatch y = 1
+    return (ans, y)
 end
 
 function test_no_tag()
-    y, handle = no_tag()
-    @test y == 1
-    @test handle isa RecordHandle
+    @test no_tag() == (1, 1)
 end
 
 function test_record_in_spawn()
     tasks = map(1:10) do i
         @spawn begin
-            handle = @stopwatch :record_in_spawn begin
+            ans = @stopwatch :record_in_spawn begin
                 y = i * 10
             end
-            return (y == i * 10), handle
+            return (ans, y)
         end
     end
     results = fetch.(tasks)
-    @test all(first, results)
-    @test all(handle isa RecordHandle for (_, handle) in results)
+    @test first.(results) == (1:10) .* 10
+    @test last.(results) == (1:10) .* 10
 end
 
 end  # module

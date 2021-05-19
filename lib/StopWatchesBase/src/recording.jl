@@ -88,8 +88,8 @@ _sample_record2() = @allocate_record :sample_record2
 _sample_record3() = @allocate_record
 
 """
-    @stopwatch(tag::Symbol, code) -> handle
-    @stopwatch(code) -> handle
+    @stopwatch(tag::Symbol, code)
+    @stopwatch(code)
 
 Record the start and stop times for executing `code`.
 
@@ -103,10 +103,8 @@ julia> using StopWatchesBase
 
 julia> @stopwatch begin
            sleep(0.01)
-           a = 1
-       end;
-
-julia> a
+           1
+       end
 1
 ```
 
@@ -126,19 +124,15 @@ macro stopwatch(tag::Symbol, code)
     error("use `@stopwatch :$tag ...`")
 end
 
-struct RecordHandle
-    __record::Record
-end
-
 function stopwatch_impl(__source__, __module__, tag, code)
     record = allocate_record_expr(__source__, __module__, tag)
     return quote
         local t0 = time_ns()
-        $(esc(Expr(:block, __source__, code)))
+        local ans = $(esc(Expr(:block, __source__, code)))
         local t1 = time_ns()
         local record = $record
         $push_record!(record, t1 - t0)
-        $RecordHandle(record)
+        ans
     end
 end
 # TODO: Add an option to use the geometric distribution trick to only measure
