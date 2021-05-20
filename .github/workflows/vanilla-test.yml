@@ -19,7 +19,7 @@ jobs:
       - run: |
           using Pkg
           Pkg.activate(".")
-          Pkg.develop("lib/StopWatchesBase")
+          Pkg.develop(path="lib/StopWatchesBase")
           Pkg.test()
         shell: julia {0}
       - uses: julia-actions/julia-processcoverage@v1
