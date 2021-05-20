@@ -9,18 +9,26 @@ for thread-friendliness.
 ```julia
 julia> using StopWatches
 
-julia> @stopwatch sleep(0.01)
+julia> f() = @stopwatch sleep(0.01);
+
+julia> g() = @stopwatch :longer sleep(0.1);
+
+julia> f()
+
+julia> f()
+
+julia> g()
 ```
 
 The timing can be obtained via, e.g.,
 
 ``````julia
-julia> df = StopWatches.time_dataframe()
-1×8 DataFrame
+2×8 DataFrame
  Row │ average_time  total_time   ncalls  tag     file     line   fullname  pkgid
      │ Quantity…     Quantity…    Int64   Union…  Union…   Int64  Tuple…    Union…
 ─────┼─────────────────────────────────────────────────────────────────────────────
-   1 │  0.0111214 s  0.0111214 s       1          REPL[2]      1  (:Main,)
+   1 │  0.0111036 s  0.0222073 s       2          REPL[2]      1  (:Main,)
+   2 │  0.101307 s   0.101307 s        1  longer  REPL[3]      1  (:Main,)
 ``````
 
 ## API summary
