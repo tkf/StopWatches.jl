@@ -23,6 +23,7 @@ julia> g()
 The timing can be obtained via, e.g.,
 
 ``````julia
+julia> df = StopWatches.time_dataframe()
 2×8 DataFrame
  Row │ average_time  total_time   ncalls  tag     file     line   fullname  pkgid
      │ Quantity…     Quantity…    Int64   Union…  Union…   Int64  Tuple…    Union…
@@ -45,3 +46,12 @@ simply re-expose these APIs.
 * `StopWatches.summary()`: display summary data.
 * `StopWatches.time_dataframe()`: export summary data as a `DataFrame`.
 * `StopWatches.time_table()`: export summary data as a table.
+
+## See also:
+
+* [Profiling · The Julia Language](https://docs.julialang.org/en/v1/manual/profile/)
+* [EventTracker.jl](https://github.com/tkf/EventTracker.jl):
+  Track all individual timings.
+* [TimerOutputs.jl](https://github.com/KristofferC/TimerOutputs.jl):
+  Formatted output of timed sections in Julia.
+* [JuliaPerf/*.jl](https://github.com/JuliaPerf)
